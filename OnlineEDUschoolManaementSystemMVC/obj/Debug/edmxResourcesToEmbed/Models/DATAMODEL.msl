@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OnlineEduDBModelStoreContainer" CdmEntityContainer="DBEntities">
+    <EntitySetMapping Name="CartTbls">
+      <EntityTypeMapping TypeName="OnlineEduDBModel.CartTbl">
+        <MappingFragment StoreEntitySet="CartTbl">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CourseTbls">
+      <EntityTypeMapping TypeName="OnlineEduDBModel.CourseTbl">
+        <MappingFragment StoreEntitySet="CourseTbl">
+          <ScalarProperty Name="courseId" ColumnName="courseId" />
+          <ScalarProperty Name="courseName" ColumnName="courseName" />
+          <ScalarProperty Name="coursePrice" ColumnName="coursePrice" />
+          <ScalarProperty Name="introduction" ColumnName="introduction" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="numberOfLectures" ColumnName="numberOfLectures" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="lecturerId" ColumnName="lecturerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LecturerTbls">
+      <EntityTypeMapping TypeName="OnlineEduDBModel.LecturerTbl">
+        <MappingFragment StoreEntitySet="LecturerTbl">
+          <ScalarProperty Name="lecturerId" ColumnName="lecturerId" />
+          <ScalarProperty Name="lecturerName" ColumnName="lecturerName" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetailTbls">
+      <EntityTypeMapping TypeName="OnlineEduDBModel.OrderDetailTbl">
+        <MappingFragment StoreEntitySet="OrderDetailTbl">
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
+          <ScalarProperty Name="courseId" ColumnName="courseId" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTbls">
+      <EntityTypeMapping TypeName="OnlineEduDBModel.UserTbl">
+        <MappingFragment StoreEntitySet="UserTbl">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="userStatus" ColumnName="userStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

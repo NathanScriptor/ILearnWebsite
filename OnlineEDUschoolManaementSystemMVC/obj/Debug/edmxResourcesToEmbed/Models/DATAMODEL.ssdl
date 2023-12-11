@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnlineEduDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CartTbl">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="price" Type="int" />
+    <Property Name="total" Type="int" />
+  </EntityType>
+  <EntityType Name="CourseTbl">
+    <Key>
+      <PropertyRef Name="courseId" />
+    </Key>
+    <Property Name="courseId" Type="int" Nullable="false" />
+    <Property Name="courseName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="coursePrice" Type="decimal" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="introduction" Type="text" />
+    <Property Name="description" Type="text" />
+    <Property Name="numberOfLectures" Type="int" Nullable="false" />
+    <Property Name="discount" Type="int" />
+    <Property Name="img" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="lecturerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LecturerTbl">
+    <Key>
+      <PropertyRef Name="lecturerId" />
+    </Key>
+    <Property Name="lecturerId" Type="int" Nullable="false" />
+    <Property Name="lecturerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderDetailTbl">
+    <Key>
+      <PropertyRef Name="orderId" />
+    </Key>
+    <Property Name="orderId" Type="int" Nullable="false" />
+    <Property Name="courseId" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" />
+  </EntityType>
+  <EntityType Name="UserTbl">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="role" Type="int" Nullable="false" />
+    <Property Name="phoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="userStatus" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__CourseTbl__lectu__29572725">
+    <End Role="LecturerTbl" Type="Self.LecturerTbl" Multiplicity="1" />
+    <End Role="CourseTbl" Type="Self.CourseTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LecturerTbl">
+        <PropertyRef Name="lecturerId" />
+      </Principal>
+      <Dependent Role="CourseTbl">
+        <PropertyRef Name="lecturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OnlineEduDBModelStoreContainer">
+    <EntitySet Name="CartTbl" EntityType="Self.CartTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseTbl" EntityType="Self.CourseTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LecturerTbl" EntityType="Self.LecturerTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetailTbl" EntityType="Self.OrderDetailTbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserTbl" EntityType="Self.UserTbl" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CourseTbl__lectu__29572725" Association="Self.FK__CourseTbl__lectu__29572725">
+      <End Role="LecturerTbl" EntitySet="LecturerTbl" />
+      <End Role="CourseTbl" EntitySet="CourseTbl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

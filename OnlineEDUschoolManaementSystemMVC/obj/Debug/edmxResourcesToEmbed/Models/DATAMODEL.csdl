@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OnlineEduDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CartTbl">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="total" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CourseTbl">
+    <Key>
+      <PropertyRef Name="courseId" />
+    </Key>
+    <Property Name="courseId" Type="Int32" Nullable="false" />
+    <Property Name="courseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="coursePrice" Type="Decimal" Precision="15" Scale="0" Nullable="false" />
+    <Property Name="introduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="numberOfLectures" Type="Int32" Nullable="false" />
+    <Property Name="discount" Type="Int32" />
+    <Property Name="img" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lecturerId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="LecturerTbl" Relationship="Self.FK__CourseTbl__lectu__29572725" FromRole="CourseTbl" ToRole="LecturerTbl" />
+  </EntityType>
+  <EntityType Name="LecturerTbl">
+    <Key>
+      <PropertyRef Name="lecturerId" />
+    </Key>
+    <Property Name="lecturerId" Type="Int32" Nullable="false" />
+    <Property Name="lecturerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CourseTbls" Relationship="Self.FK__CourseTbl__lectu__29572725" FromRole="LecturerTbl" ToRole="CourseTbl" />
+  </EntityType>
+  <EntityType Name="OrderDetailTbl">
+    <Key>
+      <PropertyRef Name="orderId" />
+    </Key>
+    <Property Name="orderId" Type="Int32" Nullable="false" />
+    <Property Name="courseId" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Int32" />
+  </EntityType>
+  <EntityType Name="UserTbl">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="role" Type="Int32" Nullable="false" />
+    <Property Name="phoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userStatus" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__CourseTbl__lectu__29572725">
+    <End Role="LecturerTbl" Type="Self.LecturerTbl" Multiplicity="1" />
+    <End Role="CourseTbl" Type="Self.CourseTbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LecturerTbl">
+        <PropertyRef Name="lecturerId" />
+      </Principal>
+      <Dependent Role="CourseTbl">
+        <PropertyRef Name="lecturerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CartTbls" EntityType="Self.CartTbl" />
+    <EntitySet Name="CourseTbls" EntityType="Self.CourseTbl" />
+    <EntitySet Name="LecturerTbls" EntityType="Self.LecturerTbl" />
+    <EntitySet Name="OrderDetailTbls" EntityType="Self.OrderDetailTbl" />
+    <EntitySet Name="UserTbls" EntityType="Self.UserTbl" />
+    <AssociationSet Name="FK__CourseTbl__lectu__29572725" Association="Self.FK__CourseTbl__lectu__29572725">
+      <End Role="LecturerTbl" EntitySet="LecturerTbls" />
+      <End Role="CourseTbl" EntitySet="CourseTbls" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
