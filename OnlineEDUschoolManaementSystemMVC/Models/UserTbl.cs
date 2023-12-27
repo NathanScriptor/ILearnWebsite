@@ -14,11 +14,20 @@ namespace OnlineEDUschoolManaementSystemMVC.Models
     
     public partial class UserTbl
     {
-        public int userId { get; set; }
+        public UserTbl()
+        {
+            this.Carts = new HashSet<Cart>();
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
+        public string userID { get; set; }
         public string userName { get; set; }
         public string password { get; set; }
         public int role { get; set; }
         public string phoneNumber { get; set; }
         public int userStatus { get; set; }
+    
+        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

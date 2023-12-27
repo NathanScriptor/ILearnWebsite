@@ -47,6 +47,12 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Management" />
@@ -96,13 +102,52 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\EDUData.mdf" />
-    <Content Include="App_Data\EDUData_log.ldf">
-      <DependentUpon>EDUData.mdf</DependentUpon>
-    </Content>
+    <Content Include="Areas\Admin\Content\css\bootstrap-social.css" />
+    <Content Include="Areas\Admin\Content\css\bootstrap-theme.min.css" />
+    <Content Include="Areas\Admin\Content\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\Content\css\dataTables\dataTables.bootstrap.css" />
+    <Content Include="Areas\Admin\Content\css\dataTables\dataTables.responsive.css" />
+    <Content Include="Areas\Admin\Content\css\font-awesome.css" />
+    <Content Include="Areas\Admin\Content\css\font-awesome.min.css" />
+    <Content Include="Areas\Admin\Content\css\metisMenu.min.css" />
+    <Content Include="Areas\Admin\Content\css\morris.css" />
+    <Content Include="Areas\Admin\Content\css\startmin.css" />
+    <Content Include="Areas\Admin\Content\css\style.css" />
+    <Content Include="Areas\Admin\Content\css\timeline.css" />
+    <Content Include="Areas\Admin\Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Admin\Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Admin\Content\js\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Content\js\dataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Areas\Admin\Content\js\dataTables\jquery.dataTables.min.js" />
+    <Content Include="Areas\Admin\Content\js\flot-data.js" />
+    <Content Include="Areas\Admin\Content\js\flot\excanvas.min.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.colorhelpers.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.canvas.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.categories.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.crosshair.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.errorbars.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.image.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.navigate.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.pie.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.resize.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.selection.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.stack.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.symbol.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.threshold.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.time.js" />
+    <Content Include="Areas\Admin\Content\js\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Areas\Admin\Content\js\jquery.min.js" />
+    <Content Include="Areas\Admin\Content\js\metisMenu.min.js" />
+    <Content Include="Areas\Admin\Content\js\morris-data.js" />
+    <Content Include="Areas\Admin\Content\js\morris.min.js" />
+    <Content Include="Areas\Admin\Content\js\raphael.min.js" />
+    <Content Include="Areas\Admin\Content\js\startmin.js" />
     <Content Include="Content\assets\css\style-starter.css" />
     <Content Include="Content\assets\css\style.css" />
     <Content Include="Content\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\assets\images\30-ngay-gioi-ngu-phap-tieng-anh.jpg" />
     <Content Include="Content\assets\images\about.jpg" />
     <Content Include="Content\assets\images\b1.png" />
     <Content Include="Content\assets\images\banner.png" />
@@ -120,9 +165,15 @@
     <Content Include="Content\assets\images\design.png" />
     <Content Include="Content\assets\images\history.png" />
     <Content Include="Content\assets\images\img1.jpg" />
+    <Content Include="Content\assets\images\le-thi-thanh.jpg" />
     <Content Include="Content\assets\images\logo.png" />
     <Content Include="Content\assets\images\middle.png" />
+    <Content Include="Content\assets\images\page-title-background.jpg" />
     <Content Include="Content\assets\images\paint.png" />
+    <Content Include="Content\assets\images\reason1.jpg" />
+    <Content Include="Content\assets\images\reason2.jpg" />
+    <Content Include="Content\assets\images\reason3.jpg" />
+    <Content Include="Content\assets\images\reason4.jpg" />
     <Content Include="Content\assets\images\stats1.png" />
     <Content Include="Content\assets\images\stats2.png" />
     <Content Include="Content\assets\images\stats3.png" />
@@ -134,6 +185,15 @@
     <Content Include="Content\assets\images\testi1.jpg" />
     <Content Include="Content\assets\images\testi2.jpg" />
     <Content Include="Content\assets\images\testi3.jpg" />
+    <Content Include="Content\assets\images\toeic-canban.jpg" />
+    <Content Include="Content\assets\images\toeic-caynen.jpg" />
+    <Content Include="Content\assets\images\toeic-chuyensau.jpg" />
+    <Content Include="Content\assets\images\toeic-part-1.jpg" />
+    <Content Include="Content\assets\images\toeic-part-2.jpg" />
+    <Content Include="Content\assets\images\toeic-part-3.jpg" />
+    <Content Include="Content\assets\images\toeic-part-4.jpg" />
+    <Content Include="Content\assets\images\toeic-part-5.jpg" />
+    <Content Include="Content\assets\images\toeic-part-7.jpg" />
     <Content Include="Content\assets\images\video.jpg" />
     <Content Include="Content\assets\js\bootstrap.min.js" />
     <Content Include="Content\assets\js\counter.js" />
@@ -142,90 +202,76 @@
     <Content Include="Content\assets\js\owl.carousel.js" />
     <Content Include="Content\assets\js\theme-change.js" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DATAMODEL.Context.tt">
+    <Content Include="Models\Data\WebDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DATAMODEL.edmx</DependentUpon>
-      <LastGenOutput>DATAMODEL.Context.cs</LastGenOutput>
+      <DependentUpon>WebDataModel.edmx</DependentUpon>
+      <LastGenOutput>WebDataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DATAMODEL.tt">
+    <Content Include="Models\Data\WebDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DATAMODEL.edmx</DependentUpon>
-      <LastGenOutput>DATAMODEL.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EDUMODELS.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EDUMODELS.Context.cs</LastGenOutput>
-      <DependentUpon>EDUMODELS.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\EDUMODELS.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EDUMODELS.edmx</DependentUpon>
-      <LastGenOutput>EDUMODELS.cs</LastGenOutput>
+      <DependentUpon>WebDataModel.edmx</DependentUpon>
+      <LastGenOutput>WebDataModel.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AdminAuthorize.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\HomeAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LecturerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminTbl.cs">
-      <DependentUpon>EDUMODELS.tt</DependentUpon>
+    <Compile Include="Models\Data\Account.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CartTbl.cs">
-      <DependentUpon>DATAMODEL.tt</DependentUpon>
+    <Compile Include="Models\Data\Cart.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\Category.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\Course.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\Decentralization.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\FunctionT.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\Lecturer.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\OrderDetail.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\Student.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\sysdiagram.cs">
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\WebDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\WebDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Data\WebDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\HeThong\Common.cs" />
-    <Compile Include="Models\CourseTbl.cs">
-      <DependentUpon>DATAMODEL.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DATAMODEL.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DATAMODEL.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DATAMODEL.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DATAMODEL.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DATAMODEL.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DATAMODEL.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDUMODELS.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EDUMODELS.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDUMODELS.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EDUMODELS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDUMODELS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EDUMODELS.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LecturerTbl.cs">
-      <DependentUpon>DATAMODEL.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrderDetailTbl.cs">
-      <DependentUpon>DATAMODEL.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TblContact.cs">
-      <DependentUpon>EDUMODELS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TblUser.cs">
-      <DependentUpon>EDUMODELS.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserTbl.cs">
-      <DependentUpon>DATAMODEL.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,28 +281,39 @@
     <Content Include="Content\assets\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\assets\fonts\FontAwesome.otf" />
-    <EntityDeploy Include="Models\EDUMODELS.edmx">
+    <Content Include="Areas\Admin\Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Admin\Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Admin\Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Admin\Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Admin\Content\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Content\fonts\glyphicons-halflings-regular.woff2" />
+    <EntityDeploy Include="Models\Data\WebDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EDUMODELS.Designer.cs</LastGenOutput>
+      <LastGenOutput>WebDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\EDUMODELS.edmx.diagram">
-      <DependentUpon>EDUMODELS.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\DATAMODEL.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DATAMODEL.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DATAMODEL.edmx.diagram">
-      <DependentUpon>DATAMODEL.edmx</DependentUpon>
+    <Content Include="Models\Data\WebDataModel.edmx.diagram">
+      <DependentUpon>WebDataModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shareds\_LayoutPanel.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Registration.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Courses.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\HomeAdmin\Index.cshtml" />
+    <Content Include="Views\Error\NoPrivilege.cshtml" />
+    <Content Include="Views\Lecturer\LecturerList.cshtml" />
+    <Content Include="Views\Shareds\_LayoutDashboard.cshtml" />
+    <Content Include="Views\Lecturer\AddLecturer.cshtml" />
+    <Content Include="Views\Authentication\Signin.cshtml" />
+    <Content Include="Views\Authentication\Signup.cshtml" />
+    <Content Include="Views\Course\PriceIncreased.cshtml" />
+    <Content Include="Views\Course\PriceDecreased.cshtml" />
+    <Content Include="Views\Course\Search.cshtml" />
+    <Content Include="Views\Shareds\_LayoutCourse.cshtml" />
+    <Content Include="Views\Course\GetCourse.cshtml" />
+    <Content Include="Views\Lecturer\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -265,7 +322,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Course\" />
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

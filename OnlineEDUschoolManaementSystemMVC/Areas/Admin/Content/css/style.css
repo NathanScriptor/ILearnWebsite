@@ -1,0 +1,33 @@
+﻿.btn-1 {
+    margin: 5px 0px;
+    width: 50px;
+}
+
+.label-style {
+    margin: 5px 0px 10px 20px;
+    display: block;
+    font-size: 20px;
+}
+
+.input-style {
+    margin: 10px 0px 10px 20px;
+    width: 1000px;
+    font-size: 16px;
+}
+
+.textarea-style {
+    border-radius: 6px;
+    line-height: 1.33333333;
+    font-size: 16px;
+    width: 1000px;
+    padding: 10px 16px;
+    border: 2px solid black;
+}
+
+.ml-2 {
+    margin-left: 20px;
+}
+
+.mb-5px {
+    margin-top: 5px !important;
+}

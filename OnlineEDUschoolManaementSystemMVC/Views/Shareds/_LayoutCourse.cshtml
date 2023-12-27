@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ILearn - Dashboard</title>
+
+    <link href="https://fonts.cdnfonts.com/css/beautiful-2" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/assets/css/style-starter.css" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="height: 20px; z-index: 1; background: #fff; position: sticky" class="fixed-top"> </div>
+    <header id="site-header" class="fixed-top nav-fixed minimal-border-nav minimal-box">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke">
+                <h1>
+                    <a class="navbar-brand logo-title" href="@Url.Action("Index","Home")" style="font-weight: bolder">
+                        <img class="img-fluid" src="~/Content/assets/images/logo.png" alt=" "> IlearnToeic
+                    </a>
+                </h1>
+                <button class="navbar-toggler collapsed bg-gradient" type="button" data-toggle="collapse"
+                        data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item active d-flex align-center">
+                            <a class="nav-link">@Html.ActionLink("Trang chủ", "Index", "Home") <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item d-flex align-center">
+                            <a class="nav-link">@Html.ActionLink("Khóa học", "Index", "Course")</a>
+                        </li>
+                        <li class="nav-item d-flex align-center">
+                            <a class="nav-link">@Html.ActionLink("Đăng nhập", "Signin", "Authentication")</a>
+                        </li>
+                        <li class="nav-item d-flex align-center">
+                            <a class="nav-link">@Html.ActionLink("Đăng ký", "Signup", "Authentication")</a>
+                        </li>
+
+                        <div class="search-right">
+                            <a href="#search" class="btn button-style" title="search">Search</a>
+
+                            <div id="search" class="pop-overlay">
+                                <div class="popup">
+                                    <h4 class="search-pop-text-w3 text-white text-center mb-4">
+                                        Nhập tên khóa học
+                                    </h4>
+                                    <form action="@Url.Action("Search","Course")" method="GET" class="search-box">
+                                        <div class="input-search">
+                                            <span class="fa fa-search mr-2"
+                                                  aria-hidden="true"></span><input type="search"
+                                                                                   placeholder="Tìm khóa học" name="search" required="required"
+                                                                                   autofocus="">
+                                        </div>
+                                        <button type="submit" class="btn button-style">Search</button>
+                                    </form>
+                                </div>
+                                <a class="close" href="#close">×</a>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="minimal-box-footer minimal-border"
+         @RenderBody()
+    </div>
+
+    <footer>
+        <div class="copyright-footer text-center">
+            <div class="container">
+                <div class="columns">
+                    <p style="color: black">
+                        2023 Online Study School. All rights reserved. Developed by <a href="https://uit.edu.vn/" style="color: black" target="_blank">UIT Student</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+</html>

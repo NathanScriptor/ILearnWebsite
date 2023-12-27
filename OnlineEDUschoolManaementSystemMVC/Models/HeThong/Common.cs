@@ -1,84 +1,50 @@
-﻿using System;
+﻿using OnlineEDUschoolManaementSystemMVC.Models.Data;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
 
 namespace OnlineEDUschoolManaementSystemMVC.Models
 {
-    public class MapCourses
+    public class Common
     {
-        DBEntities db = new DBEntities();
-        //1. Danh sach
-        public List<CourseTbl> CourseTbls()
+        WebsiteDBEntities db = new WebsiteDBEntities();
+        public static string GetLecturerNameFromCourse(Course course)
         {
-            try 
+            using (WebsiteDBEntities db = new WebsiteDBEntities())
             {
-                var listCourse = db.CourseTbls.ToList();
-                return listCourse;
-            }
-            catch 
-            {
-                return new List<CourseTbl>();
-            }
-        }   
-        //2. Chi tiet
-        public CourseTbl ChiTiet(int courseid)
-        {
-            try
-            {
-                return db.CourseTbls.Find(courseid);
-            }
-            catch
-            {
-                return new CourseTbl();
+                var gv = db.Lecturers.FirstOrDefault(p => p.ID == course.lecturerID);
+                return gv.lecturerName;
             }
         }
-        //3. Them moi
-        public int ThemMoi(CourseTbl newModel)
+
+        public static Lecturer GetLecturerFromID(Course course)
         {
-            try
+            using(WebsiteDBEntities db = new WebsiteDBEntities())
             {
-                db.CourseTbls.Add(newModel);
-                db.SaveChanges();
-                return newModel.courseId;
-            }
-            catch
-            {
-                return 0;
+                return db.Lecturers.FirstOrDefault(p => p.ID == course.lecturerID);
             }
         }
-        //4. Cap nhat
-        public bool CapNhat(CourseTbl updateModel) 
+
+        public static int GetCourseTeachedNumber(Lecturer lecturer)
         {
-            try
+            using (WebsiteDBEntities db = new WebsiteDBEntities())
             {
-                // 1. Tim doi tuong can cap nhat
-                var khoaHoc = db.CourseTbls.Find(updateModel.courseId);
-                khoaHoc.courseId = updateModel.courseId;
-                khoaHoc.courseName = updateModel.courseName;
-                khoaHoc.coursePrice = updateModel.coursePrice;
-                khoaHoc.description = updateModel.description;
-                khoaHoc.discount = updateModel.discount;
-                db.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
+                int count = db.Courses.Count(m => m.lecturerID == lecturer.ID);
+                return count;
             }
         }
-        //5. Xoa
-        public bool Xoa(int maKhoaHoc)
+
+        public static List<Course> GetCourseTeachedByLecturer(Lecturer lecturer)
         {
-            try
+            using (WebsiteDBEntities db = new WebsiteDBEntities())
             {
-                var khoaHoc = db.CourseTbls.Find(maKhoaHoc);
-                db.CourseTbls.Remove(khoaHoc);
-                db.SaveChanges();
-                return true;
+                List<Course> courseList = (List<Course>)db.Courses.Where(p => p.lecturerID == lecturer.ID).OrderBy(p=>p.courseName).ToList();
+                return courseList;
             }
-            catch { return false; }
         }
     }
 }
