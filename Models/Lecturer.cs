@@ -11,11 +11,15 @@ public partial class Lecturer
 
     public string? Description { get; set; }
 
-    public string? Email { get; set; }
+    public string Email { get; set; } = null!;
 
-    public string? Phone { get; set; }
+    public string Phone { get; set; } = null!;
 
     public string? Img { get; set; }
+
+    public int AccountId { get; set; }
+
+    public virtual Account Account { get; set; } = null!;
 
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }

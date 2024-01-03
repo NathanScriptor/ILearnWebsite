@@ -2,8 +2,10 @@
 @using ILEARN.Models
 
 @{
-    ViewBag.Title = "Trang chủ";
+    ViewData["Title"] = "Trang chủ";
 }
+
+<partial name="_Notification"/>
 
 <section id="home" style="height: 800px " class="w3l-banner py-5 minimal-border">
     <div class="container pt-5 pb-md-4">
@@ -48,9 +50,9 @@
                     <br>
                     Chào đón bạn đến với:
                     <br>
-                    <strong style="font-size: 20px">TRUNG TÂM ANH NGỮ IMAX</strong>
+                    <strong style="font-size: 20px">TRUNG TÂM ANH NGỮ ILEARN</strong>
                     <br>
-                    Trung tâm Anh ngữ IMAX chuyên đào tạo và luyện thi TOEIC, đội ngũ giảng viên trung tâm đã thiết kế chuỗi khóa học từ cơ bản đến nâng cao để <strong>giúp bất kỳ ai có mong muốn thi chứng chỉ TOEIC đều trở nên vô cùng đơn giản trong vòng từ 3-6 tháng</strong>.
+                    Trung tâm Anh ngữ ILEARN chuyên đào tạo và luyện thi TOEIC, đội ngũ giảng viên trung tâm đã thiết kế chuỗi khóa học từ cơ bản đến nâng cao để <strong>giúp bất kỳ ai có mong muốn thi chứng chỉ TOEIC đều trở nên vô cùng đơn giản trong vòng từ 3-6 tháng</strong>.
                     <br>
                     Trong 3 năm qua, chúng tôi đã luyện thi cho hơn 2000 bạn sinh viên và người đi làm, giúp cho họ nâng cao chất lượng học tập trên trường và phát triển sự nghiệp.
                     <br>
@@ -75,15 +77,15 @@
                         {
                             <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12 mt-3 mb-3">
                                 <div class="course-item pb-2">
-                                    <a href="#">
+                                    <a href="@Url.Action("GetCourse","Cart",new {ID = j.Id})">
                                         <div class="course-item-image">
                                             <img src="~/images/@j.Img" alt="" class="minimal-border-bottom" />
                                         </div>
                                     </a>
                                     <div class="course-item-detail">
                                         <h3 class="title" style="min-height: unset">
-                                            <a href="@Url.Action("GetCourse","Course",new {ID = j.Id})">
-                                                <div class="ellipsis-2 course-name ml-3 mt-3" style="height: 42px">@j.CourseName</div>
+                                            <a href="@Url.Action("GetCourse","Cart",new {ID = j.Id})">
+                                                <span class="ellipsis-2 course-name ml-3 mt-3" style="height: 42px">@j.CourseName</span>
                                             </a>
                                         </h3>
                                     </div>
@@ -135,15 +137,15 @@
                         {
                             <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12 mt-3 mb-3">
                                 <div class="course-item pb-2">
-                                    <a href="#">
+                                    <a href="@Url.Action("GetCourse","Cart",new {ID = j.Id})">
                                         <div class="course-item-image">
                                             <img src="~/images/@j.Img" alt="" class="minimal-border-bottom" />
                                         </div>
                                     </a>
                                     <div class="course-item-detail">
                                         <h3 class="title" style="min-height: unset">
-                                            <a href="@Url.Action("GetCourse","Course",new {ID = j.Id})">
-                                                <div class="ellipsis-2 course-name ml-3 mt-3" style="height: 42px">@j.CourseName</div>
+                                            <a href="@Url.Action("GetCourse","Cart",new {ID = j.Id})">
+                                                <span class="ellipsis-2 course-name ml-3 mt-3" style="height: 42px">@j.CourseName</span>
                                             </a>
                                         </h3>
                                     </div>
@@ -195,14 +197,14 @@
                         {
                             <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12 mt-3 mb-3">
                                 <div class="course-item">
-                                    <a href="#">
+                                    <a href="@Url.Action("GetCourse","Cart",new {ID = j.Id})">
                                         <div class="course-item-image">
                                             <img src="~/images/@j.Img" alt="" class="minimal-border-bottom"/>
                                         </div>
                                     </a>
                                     <div class="course-item-detail">
                                         <h3 class="title" style="min-height: unset">
-                                            <a href="@Url.Action("GetCourse","Course",new {ID = j.Id})">
+                                            <a href="@Url.Action("GetCourse","Cart",new {ID = j.Id})">
                                                 <span class="ellipsis-2 course-name ml-3 mt-3" style="height: 42px">@j.CourseName</span>
                                             </a>
                                         </h3>

@@ -2,7 +2,7 @@
 @model List<ILEARN.Models.Course>
 
 @{
-    ViewBag.Title = "Danh sách khóa học";
+    ViewData["Title"] = "Danh sách khóa học";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -31,14 +31,14 @@
                     {
                         <div class="col-xl-3 col-lg-4 col-md-6 col-xs-12 mt-3 mb-3">
                             <div class="course-item">
-                                <a href="@Url.Action("GetCourse","Course",new {ID = j.Id})">
+                                <a href="@Url.Action("GetCourse","Cart",new {ID = j.Id})">
                                     <div class="course-item-image minimal-border-bottom">
                                         <img src="~/images/@j.Img" alt="" />
                                     </div>
                                 </a>
                                 <div class="course-item-detail">
                                     <h3 class="title" style="min-height: unset">
-                                        <a href="@Url.Action("GetCourse","Course",new {ID = j.Id})">
+                                        <a href="@Url.Action("GetCourse","Cart",new {ID = j.Id})">
                                             <span class="ellipsis-2 course-name ml-3 mt-3 mr-3" style="height: 42px">@j.CourseName</span>
                                         </a>
                                     </h3>

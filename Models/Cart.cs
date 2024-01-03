@@ -7,11 +7,11 @@ public partial class Cart
 {
     public int Id { get; set; }
 
-    public int UserId { get; set; }
+    public int SessionId { get; set; }
 
-    public int OrderId { get; set; }
+    public int CourseId { get; set; }
 
-    public decimal? Total { get; set; }
+    public virtual Course Course { get; set; } = null!;
 
-    public virtual OrderDetail Order { get; set; } = null!;
+    public virtual ShoppingSession Session { get; set; } = null!;
 }

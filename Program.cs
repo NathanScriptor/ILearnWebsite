@@ -1,6 +1,11 @@
 using ILEARN.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace ILEARN
 {
@@ -24,12 +29,18 @@ namespace ILEARN
                     option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
                 });
 
+            builder.Services.AddControllers();
+
             builder.Services.AddDistributedMemoryCache();
 
-            //builder.Services.AddSession(options =>
-            //{
-            //    options.IdleTimeout = TimeSpan.FromMinutes(10);
-            //});
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            builder.Services.AddHttpContextAccessor();
 
             var app = builder.Build();
 
@@ -40,11 +51,11 @@ namespace ILEARN
                 app.UseHsts();
             }
 
-            //app.UseSession();
+            app.UseSession();
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
+            app.UseStaticFiles();         
 
             app.UseRouting();
 
@@ -54,7 +65,7 @@ namespace ILEARN
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Logout}/{id?}");
 
             app.Run();
         }

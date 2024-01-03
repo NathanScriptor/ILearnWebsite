@@ -9,7 +9,5 @@ public partial class FunctionT
 
     public string? FunctionName { get; set; }
 
-    public string? FunctionCode { get; set; }
-
     public virtual ICollection<Decentralization> Decentralizations { get; set; } = new List<Decentralization>();
 }

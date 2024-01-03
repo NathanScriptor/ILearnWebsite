@@ -29,29 +29,25 @@ public partial class IlearnDbContext : DbContext
 
     public virtual DbSet<Lecturer> Lecturers { get; set; }
 
-    public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+    public virtual DbSet<ShoppingSession> ShoppingSessions { get; set; }
 
     public virtual DbSet<Student> Students { get; set; }
 
+    public virtual DbSet<Video> Videos { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=ASUS\\SQLSERVER;Database=ILearnDB;Trusted_Connection=True;TrustServerCertificate=True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=ASUS\\SQLSERVER;Database=ILearnDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => new { e.Id, e.Username }).HasName("PK__Account__3214EC27E5C3047B");
-
             entity.ToTable("Account");
 
             entity.HasIndex(e => e.Username, "UQ__Account__F3DBC5729EAD97DB").IsUnique();
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("ID");
-            entity.Property(e => e.Username)
-                .HasMaxLength(50)
-                .HasColumnName("username");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .HasColumnName("password");
@@ -61,6 +57,9 @@ public partial class IlearnDbContext : DbContext
             entity.Property(e => e.UserStatus)
                 .HasDefaultValueSql("((1))")
                 .HasColumnName("userStatus");
+            entity.Property(e => e.Username)
+                .HasMaxLength(50)
+                .HasColumnName("username");
         });
 
         modelBuilder.Entity<Cart>(entity =>
@@ -70,16 +69,18 @@ public partial class IlearnDbContext : DbContext
             entity.ToTable("Cart");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.OrderId).HasColumnName("orderID");
-            entity.Property(e => e.Total)
-                .HasColumnType("decimal(18, 0)")
-                .HasColumnName("total");
-            entity.Property(e => e.UserId).HasColumnName("userID");
+            entity.Property(e => e.CourseId).HasColumnName("courseID");
+            entity.Property(e => e.SessionId).HasColumnName("sessionID");
 
-            entity.HasOne(d => d.Order).WithMany(p => p.Carts)
-                .HasForeignKey(d => d.OrderId)
+            entity.HasOne(d => d.Course).WithMany(p => p.Carts)
+                .HasForeignKey(d => d.CourseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Cart__orderID__01142BA1");
+                .HasConstraintName("FK_Cart_Course");
+
+            entity.HasOne(d => d.Session).WithMany(p => p.Carts)
+                .HasForeignKey(d => d.SessionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Cart_ShoppingSession");
         });
 
         modelBuilder.Entity<Category>(entity =>
@@ -140,15 +141,16 @@ public partial class IlearnDbContext : DbContext
 
         modelBuilder.Entity<Decentralization>(entity =>
         {
-            entity.HasKey(e => new { e.AccountId, e.FunctionId }).HasName("PK__Decentra__2E8D0BA8DB08AFB5");
-
             entity.ToTable("Decentralization");
 
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AccountId).HasColumnName("accountID");
             entity.Property(e => e.FunctionId).HasColumnName("functionID");
-            entity.Property(e => e.Description)
-                .HasMaxLength(50)
-                .HasColumnName("description");
+
+            entity.HasOne(d => d.Account).WithMany(p => p.Decentralizations)
+                .HasForeignKey(d => d.AccountId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Decentralization_Account");
 
             entity.HasOne(d => d.Function).WithMany(p => p.Decentralizations)
                 .HasForeignKey(d => d.FunctionId)
@@ -163,9 +165,6 @@ public partial class IlearnDbContext : DbContext
             entity.ToTable("FunctionT");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.FunctionCode)
-                .HasMaxLength(100)
-                .HasColumnName("functionCode");
             entity.Property(e => e.FunctionName)
                 .HasMaxLength(100)
                 .HasColumnName("functionName");
@@ -178,6 +177,7 @@ public partial class IlearnDbContext : DbContext
             entity.ToTable("Lecturer");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.AccountId).HasColumnName("accountID");
             entity.Property(e => e.Description)
                 .HasMaxLength(4000)
                 .HasColumnName("description");
@@ -193,25 +193,30 @@ public partial class IlearnDbContext : DbContext
             entity.Property(e => e.Phone)
                 .HasMaxLength(20)
                 .HasColumnName("phone");
+
+            entity.HasOne(d => d.Account).WithMany(p => p.Lecturers)
+                .HasForeignKey(d => d.AccountId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Lecturer_Account");
         });
 
-        modelBuilder.Entity<OrderDetail>(entity =>
+        modelBuilder.Entity<ShoppingSession>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__OrderDet__3214EC27D9EC17C1");
-
-            entity.ToTable("OrderDetail");
+            entity.ToTable("ShoppingSession");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.CourseId).HasColumnName("courseID");
-            entity.Property(e => e.Price)
+            entity.Property(e => e.AccountId).HasColumnName("accountID");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("createdAt");
+            entity.Property(e => e.Total)
                 .HasColumnType("decimal(18, 0)")
-                .HasColumnName("price");
-            entity.Property(e => e.UserId).HasColumnName("userID");
+                .HasColumnName("total");
 
-            entity.HasOne(d => d.Course).WithMany(p => p.OrderDetails)
-                .HasForeignKey(d => d.CourseId)
+            entity.HasOne(d => d.Account).WithMany(p => p.ShoppingSessions)
+                .HasForeignKey(d => d.AccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrderDeta__cours__7D439ABD");
+                .HasConstraintName("FK_ShoppingSession_Account");
         });
 
         modelBuilder.Entity<Student>(entity =>
@@ -234,6 +239,40 @@ public partial class IlearnDbContext : DbContext
             entity.Property(e => e.Phone)
                 .HasMaxLength(20)
                 .HasColumnName("phone");
+
+            entity.HasOne(d => d.Account).WithMany(p => p.Students)
+                .HasForeignKey(d => d.AccountId)
+                .HasConstraintName("FK_Student_Account");
+        });
+
+        modelBuilder.Entity<Video>(entity =>
+        {
+            entity.ToTable("Video");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("ID");
+            entity.Property(e => e.CourseId).HasColumnName("courseID");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("createdAt");
+            entity.Property(e => e.Link)
+                .HasMaxLength(50)
+                .HasColumnName("link");
+            entity.Property(e => e.ModifiedAt)
+                .HasColumnType("datetime")
+                .HasColumnName("modifiedAt");
+            entity.Property(e => e.Subtitle)
+                .HasMaxLength(4000)
+                .HasColumnName("subtitle");
+            entity.Property(e => e.Title)
+                .HasMaxLength(50)
+                .HasColumnName("title");
+
+            entity.HasOne(d => d.Course).WithMany(p => p.Videos)
+                .HasForeignKey(d => d.CourseId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Video_Course");
         });
 
         OnModelCreatingPartial(modelBuilder);

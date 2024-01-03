@@ -9,7 +9,9 @@ public partial class Decentralization
 
     public int FunctionId { get; set; }
 
-    public string? Description { get; set; }
+    public int Id { get; set; }
+
+    public virtual Account Account { get; set; } = null!;
 
     public virtual FunctionT Function { get; set; } = null!;
 }

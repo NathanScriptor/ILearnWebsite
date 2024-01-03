@@ -1,6 +1,7 @@
 ﻿@model ILEARN.Models.VMLogin;
 @{
     Layout = null;
+    ViewData["Title"] = "Đăng nhập";
 }
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Đăng nhập</title>
+    <title>@ViewData["Title"] - ILEARN</title>
 
     <link href="~/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/metisMenu.min.css" rel="stylesheet">
@@ -22,7 +23,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -56,13 +56,16 @@
                                 <div class="form-group">
                                     Bạn chưa có tài khoản? <a href="@Url.Action("Signup","Authentication")">Đăng ký</a>
                                 </div>
+                                <div class="form-group">
+                                    Bạn là giảng viên? <a href="@Url.Action("SignUpForLecturer","Authentication")">Đăng ký cho giảng viên</a>
+                                </div>
                             </fieldset>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div
 
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>

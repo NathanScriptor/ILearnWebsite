@@ -16,4 +16,6 @@ public partial class Student
     public string? Img { get; set; }
 
     public int? AccountId { get; set; }
+
+    public virtual Account? Account { get; set; }
 }

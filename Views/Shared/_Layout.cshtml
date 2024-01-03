@@ -4,12 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ILEARN</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @* <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lzn37f5qgty3vhgiss14w3exzmwzxybe1sjsesqp9s+oqd12jhcu+a56ebc1zfsj" crossorigin="anonymous"> *@
-    <link href="~/css/style-starter.css" rel="stylesheet" />
-    <link href="~/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/style-starter.css" />
+    <link rel="stylesheet" href="~/css/style.css"/>
+    <link rel="stylesheet" href="~/css/toastr.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
+
 <body>
+    <div id="loading-overlay">
+        <div class="loader"></div>
+    </div>
     <div style="height: 20px; z-index: 1; background: #fff; position: sticky" class="fixed-top"> </div>
     <header id="site-header" style="background: #FBFBFB" class="fixed-top nav-fixed minimal-box minimal-border-nav">
         <div class="container">
@@ -31,23 +36,21 @@
                         
                         @if (User.Identity.IsAuthenticated)
                         {
-                            var username = User.Identity.Name;
+                            var accountID = int.Parse(User.FindFirst("id").Value);
                             <li class="nav-item d-flex align-center dropdown">
                                 <a class="dropdown-toggle" role="button" id="dropdownMenuLink" aria-haspopup="true" data-toggle="dropdown" href="#" aria-expanded="false">
-                                    <i class="fa fa-user"></i> @username <i class="fa-solid fa-caret-down"></i>
+                                    <i class="fas fa-user"></i><i class="fa-solid fa-caret-down"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-user fa-fw"></i> User Profile</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-gear fa-fw"></i> Settings</a>
+                                    <a class="dropdown-item" href="@Url.Action("UserProfile","Home", new {ID = accountID})"><i class="fas fa-user fa-fw"></i> Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="@Url.Action("RegisteredCourses","Home", new {ID = accountID})"><i class="fas fa-list"></i> Lịch sử đăng ký khóa học</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-gear fa-fw"></i> Cài đặt</a>
                                     <div class="divider"></div>
-                                    <a class="dropdown-item" href="@Url.Action("Signout","Home")"><i class="fas fa-sign-out fa-fw"></i> Logout</a>
+                                    <a class="dropdown-item" href="@Url.Action("Logout","Home")"><i class="fas fa-sign-out fa-fw"></i> Đăng xuất</a>
                                 </div>
                             </li>
                             <li class="nav-item d-flex align-center">
                                 <a class="nav-link" href="@Url.Action("Index","Cart")"><i class="fas fa-shopping-cart"></i></a>
-                            </li>
-                            <li class="nav-item d-flex align-center">
-                                <a class="nav-link">@Html.ActionLink("Đăng xuất", "Logout", "Home")</a>
                             </li>
                         }
                         else
@@ -147,12 +150,6 @@
                                 <li>
                                     <a href="@Url.Action("Index","Course")"><i class="fa-solid fa-angles-right mr-2"></i> Khóa học</a>
                                 </li>
-                                <li>
-                                    <a href="@Url.Action("Signin","Authentication")"><i class="fa-solid fa-angles-right mr-2"></i> Đăng nhập</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Singup","Authentication")"><i class="fa-solid fa-angles-right mr-2"></i> Đăng ký</a>
-                                </li>
                             </ul>
                         </div>
                         <div class="text-black col-lg-4 col-sm-6 sub-one-left mt-lg-0 mt-sm-5 mt-4 ">
@@ -212,11 +209,33 @@
         }
     </script>
     <!-- //move top -->
-
-    <script type="text/javascript" src="~/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/theme-change.js"></script>
     <script type="text/javascript" src="~/js/jquery.magnific-popup.min.js"></script>
     <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/be96557856.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="~/js/toastr.js"></script>
+
+    <script src="https://kit.fontawesome.com/be96557856.js" crossorigin="anonymous"></script> 
+    
+    <script type="text/javascript">
+        function showLoadingOverlay() {
+            document.getElementById('loading-overlay').style.display = 'block';
+        }
+
+        function hideLoadingOverlay() {
+            document.getElementById('loading-overlay').style.display = 'none';
+        }
+
+        function simulateLoading() {
+            showLoadingOverlay();
+            setTimeout(function () {
+                hideLoadingOverlay();
+            }, 2000);
+        }
+
+        window.onload = function () {
+            simulateLoading();
+        };
+    </script>
 </body>
 </html>

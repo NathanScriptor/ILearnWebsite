@@ -27,9 +27,11 @@ public partial class Course
 
     public int? Discount { get; set; }
 
+    public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
+
     public virtual Category Category { get; set; } = null!;
 
     public virtual Lecturer Lecturer { get; set; } = null!;
 
-    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+    public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
 }
